@@ -13,13 +13,29 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
-  padding: 110px 48px 40px;
+  padding: 112px 48px 26px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   min-height: 100svh;
   text-align: center;
+}
+/* 标题文字：强制白色（压过任何模板规则） */
+.SectionHomepageHero .portfolio-hero-inner h2,
+.SectionHomepageHero .portfolio-hero-inner .portfolio-title-caption {
+  color: #fff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+}
+.SectionHomepageHero .portfolio-hero-inner h2 {
+  margin: 0;
+  font: 700 clamp(26px, 3.2vw, 44px)/1.25 "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  letter-spacing: 0.06em;
+}
+.SectionHomepageHero .portfolio-hero-inner .portfolio-title-caption {
+  margin: 8px 0 0;
+  font: 400 clamp(14px, 1.4vw, 18px)/1.4 "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  letter-spacing: 0.12em;
+  opacity: 0.9;
 }
 @media (max-width: 700px) {
   .SectionHomepageHero .portfolio-hero-inner { padding: 110px 20px 32px; }
