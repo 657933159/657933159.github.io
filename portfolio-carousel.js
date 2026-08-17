@@ -12,7 +12,9 @@
 
   const STEP = 360 / cards.length;   // 每张卡片的角度间隔
   const DEG_PER_SEC = 360 / 22;      // 22 秒转一圈
-  let rot = 0;
+  const SMOOTH = 0.14;               // 每帧逼近系数（越小越丝滑）
+  let rot = 0;                       // 当前显示角度
+  let rotTarget = 0;                 // 目标角度
   let pauseUntil = 0;
 
   const works = [
@@ -40,15 +42,19 @@
     if (progressFill) progressFill.style.width = p.toFixed(1) + "%";
   }
 
-  const TICK_MS = 50;
+  const TICK_MS = 16;               // 60fps 丝滑
   function tick() {
-    if (Date.now() >= pauseUntil) rot += DEG_PER_SEC * TICK_MS / 1000;
+    if (Date.now() >= pauseUntil) rotTarget += DEG_PER_SEC * TICK_MS / 1000;
+    // 平滑逼近目标：指数缓动（快起慢收，约 0.5s 平滑到位）
+    const diff = rotTarget - rot;
+    rot += diff * SMOOTH;
+    if (Math.abs(diff) < 0.008) rot = rotTarget;
     render();
   }
 
   function step(amount) {
-    rot += amount * STEP;
-    pauseUntil = Date.now() + 900;   // 短暂停留让用户看到新卡片
+    rotTarget += amount * STEP;
+    pauseUntil = Date.now() + 1100;  // 短暂停留让用户看清新卡片
   }
 
   if (prevBtn) prevBtn.addEventListener("click", () => step(-1));
