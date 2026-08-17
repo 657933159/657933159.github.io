@@ -1,0 +1,143 @@
+/* MOXDESIGN 作品集 · 3D 环形画廊
+ * 13 张 16:9 卡片在三维空间围成圆环（rotateY + translateZ），绕中轴旋转，
+ * 透视纵深：前方卡片大、后方卡片小（backface 隐藏背面）。
+ * 附：标题避开顶部导航、作品名居中、背景光晕、入场动效。 */
+
+/* ── hero 基础布局：标题避开顶部导航，整体垂直居中 ── */
+.SectionHomepageHero {
+  overflow: hidden;
+}
+.SectionHomepageHero .portfolio-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 110px 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100svh;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .SectionHomepageHero .portfolio-hero-inner { padding: 110px 20px 32px; }
+}
+
+/* ── 3D 环形画廊 ── */
+.orbit-stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 100%;
+  height: clamp(420px, 58vh, 680px);
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+}
+.orbit-tilt {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: rotateX(0deg);
+  transform-style: preserve-3d;
+}
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  animation: ringSpin 22s linear infinite;
+}
+.orbit-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(150px, 20vw, 370px);
+  height: clamp(84px, 11.25vw, 208px);
+  display: block;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  backface-visibility: hidden;
+  transform: translate(-50%, -50%) rotateY(calc(var(--i) * (360deg / 13))) translateZ(min(42vw, 780px));
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.orbit-card:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 30px 72px rgba(0, 0, 0, 0.7);
+}
+.orbit-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@keyframes ringSpin {
+  from { transform: rotateY(0deg); }
+  to   { transform: rotateY(360deg); }
+}
+
+/* ── 当前作品名（居中显示在画廊下方）── */
+.portfolio-ring-caption {
+  margin: 18px auto 0;
+  text-align: center;
+  font: 600 clamp(18px, 2vw, 26px)/1.3 "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  letter-spacing: 0.08em;
+  color: #fff;
+  cursor: pointer;
+  min-height: 1.4em;
+  transition: color 0.2s ease;
+}
+.portfolio-ring-caption:hover {
+  color: #c8a46a;
+}
+.portfolio-ring-caption::after {
+  content: "进入作品 →";
+  display: block;
+  margin-top: 4px;
+  font-size: 0.62em;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  opacity: 0.55;
+}
+
+/* ── hero 背景光晕动效 ── */
+.SectionHomepageHero::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 42% at 18% 30%, rgba(86, 141, 159, 0.55), transparent 70%),
+    radial-gradient(32% 38% at 82% 68%, rgba(94, 60, 140, 0.5), transparent 70%),
+    radial-gradient(26% 30% at 62% 12%, rgba(28, 108, 138, 0.45), transparent 70%);
+  animation: portfolio-aurora 16s ease-in-out infinite alternate;
+}
+@keyframes portfolio-aurora {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg);   opacity: 0.7; }
+  50%  { transform: translate3d(4%, 2%, 0) rotate(3deg); opacity: 1; }
+  100% { transform: translate3d(-3%, 3%, 0) rotate(-3deg); opacity: 0.8; }
+}
+
+/* ── 标题入场动效 ── */
+.SectionHomepageHero h1 {
+  animation: portfolio-fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.SectionHomepageHero h2 {
+  animation: portfolio-fade-up 0.9s 0.12s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.SectionHomepageHero p.portfolio-title-caption {
+  animation: portfolio-fade-up 0.9s 0.24s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.orbit-stage {
+  animation: portfolio-fade-up 1s 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes portfolio-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

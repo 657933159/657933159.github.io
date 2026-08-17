@@ -1,0 +1,12 @@
+@import url('/snowbear/snowbear.css');
+:root{--ink:#061d38;--paper:#f2faff;--acid:#ffd438;--green:#26d8eb;--line:rgba(228,248,255,.24)}
+body{background:var(--ink)}
+.hero{background:#073b70}
+.feature-image{background:#edf3f6}
+.feature-caption{background:rgba(4,34,66,.95)}
+.design-story{background:#072747}
+.gallery{background:#061b33}
+.journey{background:var(--acid)}
+.journey .section-label{color:#08657b}
+.finale:after{background:linear-gradient(0deg,rgba(3,25,49,.97),rgba(3,25,49,.04) 72%)}
+@media(max-width:760px){.hero-image{object-position:47% center}.finale>img{object-position:47% center}.hero h1{font-size:clamp(40px,10.8vw,48px)}}
