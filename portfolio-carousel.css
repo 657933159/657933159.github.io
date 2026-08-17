@@ -112,13 +112,10 @@
 
 /* ── 当前作品名（居中显示在画廊下方）── */
 .portfolio-ring-caption {
-  position: absolute;
-  bottom: 18px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   width: max-content;
   max-width: 92vw;
-  margin: 0;
+  margin: 18px auto 0;
   text-align: center;
   font: 600 clamp(18px, 2vw, 26px)/1.3 "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
   letter-spacing: 0.08em;
