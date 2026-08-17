@@ -157,82 +157,83 @@
 }
 
 
-/* ══ Apple 毛玻璃液态 UI（frosted glass）══ */
+/* ══ Apple 毛玻璃液态 UI（高透明 · 液态玻璃）══ */
 /* ── 顶部导航：悬浮玻璃药丸条 ── */
 #portfolio-navigation-frame {
-  background: rgba(24, 28, 40, 0.38) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
-  backdrop-filter: blur(22px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05)) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(220%);
+  backdrop-filter: blur(30px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
   border-radius: 28px !important;
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), inset 0 1.5px 0 rgba(255, 255, 255, 0.4), inset 0 -1px 0 rgba(255, 255, 255, 0.08);
   height: 64px !important;
   top: 12px !important;
 }
 
-/* ── 左右按钮：玻璃圆钮 ── */
+/* ── 左右按钮：液态玻璃圆钮 ── */
 .orbit-arrow {
-  background: rgba(255, 255, 255, 0.12);
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  backdrop-filter: blur(16px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.04));
+  -webkit-backdrop-filter: blur(24px) saturate(220%);
+  backdrop-filter: blur(24px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.28), inset 0 1.5px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 6px rgba(255, 255, 255, 0.12);
 }
 .orbit-arrow:hover {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08));
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
-/* ── 进度条：玻璃轨道 ── */
+/* ── 进度条：液态玻璃轨道 ── */
 .orbit-progress {
-  background: rgba(255, 255, 255, 0.16);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   height: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .orbit-progress-fill {
-  background: linear-gradient(90deg, #e6c48a, #8fb4a0);
-  box-shadow: 0 0 12px rgba(200, 164, 106, 0.6);
+  background: linear-gradient(90deg, #f0d29a, #a8cdb8);
+  box-shadow: 0 0 14px rgba(240, 210, 154, 0.7);
 }
 
-/* ── 作品名字：玻璃胶囊 ── */
+/* ── 作品名字：液态玻璃胶囊 ── */
 .portfolio-ring-caption {
-  background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(18px) saturate(170%);
-  backdrop-filter: blur(18px) saturate(170%);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+  -webkit-backdrop-filter: blur(28px) saturate(220%);
+  backdrop-filter: blur(28px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 999px;
-  padding: 10px 28px 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  padding: 12px 30px 14px;
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28), inset 0 1.5px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 8px rgba(255, 255, 255, 0.1);
 }
 
-/* ── 画廊卡片：玻璃质感边框 ── */
+/* ── 画廊卡片：液态玻璃边框 ── */
 .orbit-card {
-  background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+  -webkit-backdrop-filter: blur(28px) saturate(220%);
+  backdrop-filter: blur(28px) saturate(220%);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   border-radius: 16px;
-  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.45), inset 0 1.5px 0 rgba(255, 255, 255, 0.35);
 }
 
-/* ── 关于我 / 联系方式：玻璃面板 ── */
+/* ── 关于我 / 联系方式：液态玻璃面板 ── */
 .portfolio-about,
 .portfolio-contact {
-  background: rgba(255, 255, 255, 0.07) !important;
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  backdrop-filter: blur(22px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  backdrop-filter: blur(30px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 28px;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.3), inset 0 1.5px 0 rgba(255, 255, 255, 0.35);
 }
 .portfolio-about > * > *,
 .portfolio-contact > * > * {
-  background: rgba(255, 255, 255, 0.06);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 18px;
 }
 
