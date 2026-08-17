@@ -1,13 +1,19 @@
-/* MOXDESIGN 作品集 · 3D 环形画廊辅助脚本
- * 环形旋转由 CSS 动画（ringSpin，22s/圈）驱动；
- * 本脚本负责：跟踪"正前方"（面向观众、最大那张）的作品、显示其名称、点击进入作品页。 */
+/* MOXDESIGN 作品集 · 3D 环形画廊控制脚本
+ * 环形旋转由本脚本驱动（rotateY 变量 + requestAnimationFrame），
+ * 支持：自动旋转、左右按钮步进、进度条、正前方作品名跟踪、点击进入作品页。 */
 (() => {
+  const ring = document.querySelector(".orbit-ring");
   const caption = document.querySelector(".portfolio-ring-caption");
+  const prevBtn = document.querySelector(".orbit-prev");
+  const nextBtn = document.querySelector(".orbit-next");
+  const progressFill = document.querySelector(".orbit-progress-fill");
   const cards = [...document.querySelectorAll(".orbit-card")];
-  if (!caption || cards.length < 2) return;
+  if (!ring || cards.length < 2) return;
 
-  const DURATION = 22;            // 转一圈秒数，与 CSS ringSpin 一致
-  const STEP_ANGLE = 360 / cards.length;   // 每张卡片在环上的角度间隔
+  const STEP = 360 / cards.length;   // 每张卡片的角度间隔
+  const DEG_PER_SEC = 360 / 22;      // 22 秒转一圈
+  let rot = 0;
+  let pauseUntil = 0;
 
   const works = [
     { name: "淘气堡蹦蹦床紫色", route: "/duotrampoline/" },
@@ -25,25 +31,34 @@
     { name: "小狮王",           route: "/lionking/" }
   ];
 
-  // 环在时刻 t 的旋转角；正前方卡片：i × STEP + spin ≈ 0 (mod 360)
-  function frontIndex(t) {
-    const spin = ((t % DURATION) / DURATION) * 360;
-    const i = Math.round(-spin / STEP_ANGLE);
-    return ((i % works.length) + works.length) % works.length;
-  }
-
-  function update() {
-    const t = performance.now() / 1000;
-    const i = frontIndex(t);
+  function render() {
+    ring.style.transform = `rotateY(${rot}deg)`;
+    const i = ((Math.round(-rot / STEP) % works.length) + works.length) % works.length;
     caption.textContent = works[i].name;
     caption.dataset.route = works[i].route;
+    const p = (((rot % 360) + 360) % 360) / 360 * 100;
+    if (progressFill) progressFill.style.width = p.toFixed(1) + "%";
   }
+
+  const TICK_MS = 50;
+  function tick() {
+    if (Date.now() >= pauseUntil) rot += DEG_PER_SEC * TICK_MS / 1000;
+    render();
+  }
+
+  function step(amount) {
+    rot += amount * STEP;
+    pauseUntil = Date.now() + 900;   // 短暂停留让用户看到新卡片
+  }
+
+  if (prevBtn) prevBtn.addEventListener("click", () => step(-1));
+  if (nextBtn) nextBtn.addEventListener("click", () => step(1));
 
   caption.addEventListener("click", () => {
     const route = caption.dataset.route;
     if (route) window.location.href = route;
   });
 
-  update();
-  setInterval(update, 120);
+  render();
+  setInterval(tick, TICK_MS);
 })();
