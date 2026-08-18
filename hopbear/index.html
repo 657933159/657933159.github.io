@@ -45,55 +45,85 @@
 
   var hint = document.createElement("div");
   hint.id = "work-nav-hint";
-  hint.style.cssText = "position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:9999;" +
-    "background:linear-gradient(135deg,rgba(140,200,255,0.32) 0%,rgba(120,180,240,0.06) 30%,transparent 55%),rgba(15,20,40,0.5);" +
+  hint.style.cssText = "position:fixed;left:50%;transform:translateX(-50%);z-index:9999;" +
+    "background:linear-gradient(135deg,rgba(140,200,255,0.32) 0%,rgba(120,180,240,0.06) 30%,transparent 55%),rgba(15,20,40,0.55);" +
     "border:1px solid rgba(255,255,255,0.45);border-radius:999px;padding:12px 26px;color:#fff;" +
     "font:600 16px/1.4 'PingFang SC','Microsoft YaHei',Arial,sans-serif;letter-spacing:0.04em;" +
     "box-shadow:0 8px 26px rgba(0,0,0,0.3),inset 2px 2px 6px rgba(255,255,255,0.35),inset -2px -3px 8px rgba(0,0,0,0.25);" +
     "opacity:0;transition:opacity .3s ease;pointer-events:none;white-space:nowrap;";
   document.body.appendChild(hint);
-  function showHint(text) { hint.textContent = text; hint.style.opacity = "1"; }
+  function showHint(text, atTop) {
+    hint.textContent = text;
+    hint.style.bottom = atTop ? "auto" : "26px";
+    hint.style.top = atTop ? "96px" : "auto";
+    hint.style.opacity = "1";
+  }
   function hideHint() { hint.style.opacity = "0"; }
 
-  var lastY = window.scrollY;
   var downArmed = false, upArmed = false;
+  var armedAt = 0;
+  var MIN_GAP = 700;   // 提示出现后至少等 0.7s，避免同一次滑动惯性误触
+  var done = false;
+
+  function go(slug) {
+    if (done) return;
+    done = true;
+    document.removeEventListener("wheel", onWheel);
+    document.removeEventListener("touchmove", onTouchMove);
+    window.removeEventListener("scroll", onScroll);
+    location.href = location.pathname.replace(/[^/]+\/?$/, slug + "/");
+  }
 
   function onScroll() {
     var d = document.documentElement, b = document.body;
     var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
     var y = window.scrollY;
-    var atBottom = max > 60 && y >= max - 70;
+    var atBottom = max > 60 && y >= max - 80;
     var atTop = y <= 12;
-    var moving = y - lastY;
-    lastY = y;
-
-    if (atBottom && moving > 0) {
-      if (downArmed) {
-        window.removeEventListener("scroll", onScroll);
-        location.href = location.pathname.replace(/[^/]+\/?$/, next.slug + "/");
-        return;
+    if (atBottom) {
+      if (!downArmed) {
+        downArmed = true; upArmed = false;
+        armedAt = Date.now();
+        showHint("继续下滑进入下一个作品：" + next.name + " ↓", false);
       }
-      downArmed = true;
-      upArmed = false;
-      showHint("继续下滑进入下一个作品：" + next.name + " ↓");
-    } else if (atTop && moving < 0) {
-      if (upArmed) {
-        window.removeEventListener("scroll", onScroll);
-        location.href = location.pathname.replace(/[^/]+\/?$/, prev.slug + "/");
-        return;
+    } else if (atTop) {
+      if (!upArmed) {
+        upArmed = true; downArmed = false;
+        armedAt = Date.now();
+        showHint("继续上滑返回上一个作品：" + prev.name + " ↑", true);
       }
-      upArmed = true;
-      downArmed = false;
-      showHint("继续上滑返回上一个作品：" + prev.name + " ↑");
     } else {
-      downArmed = false;
-      upArmed = false;
+      downArmed = false; upArmed = false;
       hideHint();
     }
   }
+
+  function onWheel(e) {
+    if (Date.now() - armedAt < MIN_GAP) return;
+    if (e.deltaY > 0 && downArmed) { go(next.slug); }
+    else if (e.deltaY < 0 && upArmed) { go(prev.slug); }
+  }
+
+  var lastTouchY = null;
+  function onTouchMove(e) {
+    var t = e.touches[0].clientY;
+    if (lastTouchY !== null) {
+      var dy = t - lastTouchY;
+      if (Date.now() - armedAt >= MIN_GAP) {
+        if (dy > 10 && downArmed) { go(next.slug); return; }
+        if (dy < -10 && upArmed) { go(prev.slug); return; }
+      }
+    }
+    lastTouchY = t;
+  }
+
   window.addEventListener("scroll", onScroll, { passive: true });
+  document.addEventListener("wheel", onWheel, { passive: true });
+  document.addEventListener("touchmove", onTouchMove, { passive: true });
+  document.addEventListener("touchend", function() { lastTouchY = null; });
 })();
 </script>
+
 
 
 </body></html>
