@@ -133,7 +133,7 @@
 
   var downArmed = false, upArmed = false;
   var armedAt = 0;
-  var MIN_GAP = 700;   // 提示出现后至少等 0.7s，避免同一次滑动惯性误触
+  var MIN_GAP = 500;   // 提示出现后至少等 0.7s，避免同一次滑动惯性误触
   var done = false;
 
   function go(slug) {
@@ -150,7 +150,7 @@
     var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
     var y = window.scrollY;
     var atBottom = max > 60 && y >= max - 80;
-    var atTop = y <= 12;
+    var atTop = y <= 60;
     if (atBottom) {
       if (!downArmed) {
         downArmed = true; upArmed = false;
@@ -170,7 +170,23 @@
   }
 
   function onWheel(e) {
-    if (Date.now() - armedAt < MIN_GAP) return;
+    var now = Date.now();
+    var y = window.scrollY;
+    var d = document.documentElement, b = document.body;
+    var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
+    // 已在顶部附近上滑但未布防 → 直接布防（顶部时滚动事件不会触发，滚轮事件会）
+    if (e.deltaY < 0 && !upArmed && y <= 60) {
+      upArmed = true; downArmed = false; armedAt = now;
+      showHint("继续上滑返回上一个作品：" + prev.name + " ↑", true);
+      return;
+    }
+    // 已在底部附近下滑但未布防 → 直接布防
+    if (e.deltaY > 0 && !downArmed && max > 60 && y >= max - 80) {
+      downArmed = true; upArmed = false; armedAt = now;
+      showHint("继续下滑进入下一个作品：" + next.name + " ↓", false);
+      return;
+    }
+    if (now - armedAt < MIN_GAP) return;
     if (e.deltaY > 0 && downArmed) { go(next.slug); }
     else if (e.deltaY < 0 && upArmed) { go(prev.slug); }
   }
