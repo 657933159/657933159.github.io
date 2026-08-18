@@ -9,4 +9,26 @@
   <section class="gallery" id="gallery" aria-labelledby="gallery-title"><div class="gallery-heading"><div class="section-label"><span>03</span><span>PRODUCT VIEWS</span></div><h2 id="gallery-title">结构与<br>运动细节</h2></div><figure class="gallery-wide"><img src="/ledtheater/assets/260413.54.png" alt="悬空剧场正面视角"><figcaption>FRONT · 多人长椅座舱</figcaption></figure><figure><img src="/ledtheater/assets/260413.55.png" alt="悬空剧场斜前视角"><figcaption>QUARTER · 座舱与底座层级</figcaption></figure><figure><img src="/ledtheater/assets/260413.57.png" alt="悬空剧场侧面视角"><figcaption>PROFILE · 多轴运动空间</figcaption></figure><figure><img src="/ledtheater/assets/260413.58.png" alt="悬空剧场背面视角"><figcaption>BACK · 设备支撑结构</figcaption></figure><figure><img src="/ledtheater/assets/260413.59.png" alt="悬空剧场另一侧视角"><figcaption>LIGHTING · 科技灯光识别</figcaption></figure><figure class="gallery-wide"><img src="/ledtheater/assets/260413.60.png" alt="悬空剧场完整产品视角"><figcaption>PLATFORM · 集成动感底座</figcaption></figure></section>
   <section class="journey"><div class="section-label"><span>04</span><span>THE RIDE</span></div><p class="journey-kicker">一段影片，四层沉浸反馈</p><ol><li><span>01</span><strong>进入座舱</strong><small>BOARDING</small></li><li><span>02</span><strong>LED 环幕点亮</strong><small>VISUAL</small></li><li><span>03</span><strong>多轴同步运动</strong><small>MOTION</small></li><li><span>04</span><strong>完成虚拟旅程</strong><small>ARRIVAL</small></li></ol></section>
   <section class="finale"><img src="/ledtheater/assets/主题主视觉.png" alt="迷你 LED 悬空剧场太空主视觉"><div><p>MOVE WITH THE SCREEN</p><h2>下一段旅程<br>即将启动</h2><a href="/">返回全部作品 <span aria-hidden="true">↗</span></a></div></section>
-</main><footer><img src="/portfolio-wordmark.svg" alt="MOXDESIGN"><p>PRODUCT &amp; EXPERIENCE DESIGN</p><p>© 2026 MOXDESIGN</p></footer></body></html>
+</main><footer><img src="/portfolio-wordmark.svg" alt="MOXDESIGN"><p>PRODUCT &amp; EXPERIENCE DESIGN</p><p>© 2026 MOXDESIGN</p></footer>
+<script>
+(function() {
+  var order = ["duotrampoline","duobike","gunhero","snowbear","ledtheater","bermuda","duoski","tricycle","foodmatch","bobbi","hopbear","spaceship","lionking"];
+  var m = location.pathname.match(/\/([a-z]+)\/?$/);
+  var cur = m ? m[1] : "";
+  var idx = order.indexOf(cur);
+  if (idx === -1) return;
+  var next = order[(idx + 1) % order.length];
+  function onScroll() {
+    var d = document.documentElement, b = document.body;
+    var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
+    if (max > 60 && window.scrollY >= max - 70) {
+      window.removeEventListener("scroll", onScroll);
+      location.href = location.pathname.replace(/[^/]+\/?$/, next + "/");
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body></html>

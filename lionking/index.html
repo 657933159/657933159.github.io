@@ -9,4 +9,26 @@
   <section class="gallery" id="gallery" aria-labelledby="gallery-title"><div class="gallery-heading"><div class="section-label"><span>03</span><span>PRODUCT VIEWS</span></div><h2 id="gallery-title">醒狮造型<br>结构细节</h2></div><figure class="gallery-wide portrait-stage"><img src="/lionking/assets/12.684.png" alt="小狮王游戏机正面视角"><figcaption>FRONT · 醒狮头与大屏机柜</figcaption></figure><figure><img src="/lionking/assets/12.685.png" alt="小狮王游戏机斜前视角"><figcaption>QUARTER · 机柜与蹦床关系</figcaption></figure><figure><img src="/lionking/assets/12.686.png" alt="小狮王游戏机侧面视角"><figcaption>PROFILE · 安全运动距离</figcaption></figure><figure><img src="/lionking/assets/12.687.png" alt="小狮王游戏机俯视视角"><figcaption>TOP · 圆形弹跳区域</figcaption></figure><figure><img src="/lionking/assets/12.688.png" alt="小狮王游戏机背面视角"><figcaption>BACK · 完整机身结构</figcaption></figure><figure class="gallery-wide portrait-stage"><img src="/lionking/assets/12.689.png" alt="小狮王游戏机完整斜侧视角"><figcaption>PLATFORM · 红金软包蹦床</figcaption></figure></section>
   <section class="journey"><div class="section-label"><span>04</span><span>GAME LOOP</span></div><p class="journey-kicker">四步唤醒小狮</p><ol><li><span>01</span><strong>进入醒狮阵地</strong><small>READY</small></li><li><span>02</span><strong>听鼓点起跳</strong><small>RHYTHM</small></li><li><span>03</span><strong>腾跃完成采青</strong><small>LEAP</small></li><li><span>04</span><strong>点亮吉祥积分</strong><small>SCORE</small></li></ol></section>
   <section class="finale"><img src="/lionking/assets/主题主视觉.png" alt="小狮王中式灯会主视觉"><div><p>WAKE THE LITTLE LION</p><h2>下一场醒狮<br>即将开场</h2><a href="/">返回全部作品 <span aria-hidden="true">↗</span></a></div></section>
-</main><footer><img src="/portfolio-wordmark.svg" alt="MOXDESIGN"><p>PRODUCT &amp; EXPERIENCE DESIGN</p><p>© 2026 MOXDESIGN</p></footer></body></html>
+</main><footer><img src="/portfolio-wordmark.svg" alt="MOXDESIGN"><p>PRODUCT &amp; EXPERIENCE DESIGN</p><p>© 2026 MOXDESIGN</p></footer>
+<script>
+(function() {
+  var order = ["duotrampoline","duobike","gunhero","snowbear","ledtheater","bermuda","duoski","tricycle","foodmatch","bobbi","hopbear","spaceship","lionking"];
+  var m = location.pathname.match(/\/([a-z]+)\/?$/);
+  var cur = m ? m[1] : "";
+  var idx = order.indexOf(cur);
+  if (idx === -1) return;
+  var next = order[(idx + 1) % order.length];
+  function onScroll() {
+    var d = document.documentElement, b = document.body;
+    var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
+    if (max > 60 && window.scrollY >= max - 70) {
+      window.removeEventListener("scroll", onScroll);
+      location.href = location.pathname.replace(/[^/]+\/?$/, next + "/");
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body></html>

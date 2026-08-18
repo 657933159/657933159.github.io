@@ -9,4 +9,26 @@
   <section class="gallery" id="gallery" aria-labelledby="gallery-title"><div class="gallery-heading"><div class="section-label"><span>03</span><span>PRODUCT VIEWS</span></div><h2 id="gallery-title">双人雪道<br>结构全视角</h2></div><figure class="gallery-wide portrait-stage"><img src="/duoski/assets/25.334.png" alt="淘气堡滑雪游戏机正面视角"><figcaption>FRONT · 双屏与双踏板布局</figcaption></figure><figure><img src="/duoski/assets/25.335.png" alt="淘气堡滑雪游戏机斜前视角"><figcaption>QUARTER · 双人并排体验区</figcaption></figure><figure><img src="/duoski/assets/25.336.png" alt="淘气堡滑雪游戏机侧面视角"><figcaption>PROFILE · 扶手与运动距离</figcaption></figure><figure><img src="/duoski/assets/25.337.png" alt="淘气堡滑雪游戏机俯视视角"><figcaption>TOP · 双踏板空间规划</figcaption></figure><figure><img src="/duoski/assets/25.338.png" alt="淘气堡滑雪游戏机背面视角"><figcaption>BACK · 完整机柜结构</figcaption></figure><figure class="gallery-wide portrait-stage"><img src="/duoski/assets/25.339.png" alt="淘气堡滑雪游戏机完整斜侧视角"><figcaption>PLATFORM · 独立重心控制区</figcaption></figure></section>
   <section class="journey"><div class="section-label"><span>04</span><span>PLAYER JOURNEY</span></div><p class="journey-kicker">TWO PLAYERS · ONE SLOPE</p><ol><li><span>01</span><strong>选择雪道</strong></li><li><span>02</span><strong>站稳踏板</strong></li><li><span>03</span><strong>重心转向</strong></li><li><span>04</span><strong>冲线竞速</strong></li></ol></section>
   <section class="finale"><img src="/duoski/assets/主题主视觉.png" alt="淘气堡滑雪冰雪赛道主视觉"><div><p>RACE THE SNOW</p><h2>双人出发<br>竞速雪山</h2><a href="/">返回全部作品 <span aria-hidden="true">↗</span></a></div></section>
-</main></body></html>
+</main>
+<script>
+(function() {
+  var order = ["duotrampoline","duobike","gunhero","snowbear","ledtheater","bermuda","duoski","tricycle","foodmatch","bobbi","hopbear","spaceship","lionking"];
+  var m = location.pathname.match(/\/([a-z]+)\/?$/);
+  var cur = m ? m[1] : "";
+  var idx = order.indexOf(cur);
+  if (idx === -1) return;
+  var next = order[(idx + 1) % order.length];
+  function onScroll() {
+    var d = document.documentElement, b = document.body;
+    var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
+    if (max > 60 && window.scrollY >= max - 70) {
+      window.removeEventListener("scroll", onScroll);
+      location.href = location.pathname.replace(/[^/]+\/?$/, next + "/");
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body></html>

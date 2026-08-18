@@ -89,5 +89,27 @@
   </main>
 
   <footer><img src="/portfolio-wordmark.svg" alt="MOXDESIGN"><p>PRODUCT &amp; EXPERIENCE DESIGN</p><p>© 2026 MOXDESIGN</p></footer>
+
+<script>
+(function() {
+  var order = ["duotrampoline","duobike","gunhero","snowbear","ledtheater","bermuda","duoski","tricycle","foodmatch","bobbi","hopbear","spaceship","lionking"];
+  var m = location.pathname.match(/\/([a-z]+)\/?$/);
+  var cur = m ? m[1] : "";
+  var idx = order.indexOf(cur);
+  if (idx === -1) return;
+  var next = order[(idx + 1) % order.length];
+  function onScroll() {
+    var d = document.documentElement, b = document.body;
+    var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
+    if (max > 60 && window.scrollY >= max - 70) {
+      window.removeEventListener("scroll", onScroll);
+      location.href = location.pathname.replace(/[^/]+\/?$/, next + "/");
+    }
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
 </body>
 </html>
