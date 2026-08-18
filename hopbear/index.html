@@ -20,23 +20,80 @@
 
 <script>
 (function() {
-  var order = ["duotrampoline","duobike","gunhero","snowbear","ledtheater","bermuda","duoski","tricycle","foodmatch","bobbi","hopbear","spaceship","lionking"];
+  var works = [
+    { slug: "duotrampoline", name: "淘气堡蹦蹦床紫色" },
+    { slug: "duobike", name: "淘气堡双人自行车" },
+    { slug: "gunhero", name: "王者枪神" },
+    { slug: "snowbear", name: "雪舞熊欢" },
+    { slug: "ledtheater", name: "迷你LED悬空剧场" },
+    { slug: "bermuda", name: "百慕大冒险" },
+    { slug: "duoski", name: "淘气堡滑雪" },
+    { slug: "tricycle", name: "淘气堡三人自行车" },
+    { slug: "foodmatch", name: "美食点点乐" },
+    { slug: "bobbi", name: "电玩帮帮龙" },
+    { slug: "hopbear", name: "电玩蹦蹦熊" },
+    { slug: "spaceship", name: "潮玩飞船" },
+    { slug: "lionking", name: "小狮王" }
+  ];
   var m = location.pathname.match(/\/([a-z]+)\/?$/);
   var cur = m ? m[1] : "";
-  var idx = order.indexOf(cur);
+  var idx = -1;
+  for (var k = 0; k < works.length; k++) if (works[k].slug === cur) { idx = k; break; }
   if (idx === -1) return;
-  var next = order[(idx + 1) % order.length];
+  var next = works[(idx + 1) % works.length];
+  var prev = works[(idx - 1 + works.length) % works.length];
+
+  var hint = document.createElement("div");
+  hint.id = "work-nav-hint";
+  hint.style.cssText = "position:fixed;left:50%;transform:translateX(-50%);bottom:24px;z-index:9999;" +
+    "background:linear-gradient(135deg,rgba(140,200,255,0.32) 0%,rgba(120,180,240,0.06) 30%,transparent 55%),rgba(15,20,40,0.5);" +
+    "border:1px solid rgba(255,255,255,0.45);border-radius:999px;padding:12px 26px;color:#fff;" +
+    "font:600 16px/1.4 'PingFang SC','Microsoft YaHei',Arial,sans-serif;letter-spacing:0.04em;" +
+    "box-shadow:0 8px 26px rgba(0,0,0,0.3),inset 2px 2px 6px rgba(255,255,255,0.35),inset -2px -3px 8px rgba(0,0,0,0.25);" +
+    "opacity:0;transition:opacity .3s ease;pointer-events:none;white-space:nowrap;";
+  document.body.appendChild(hint);
+  function showHint(text) { hint.textContent = text; hint.style.opacity = "1"; }
+  function hideHint() { hint.style.opacity = "0"; }
+
+  var lastY = window.scrollY;
+  var downArmed = false, upArmed = false;
+
   function onScroll() {
     var d = document.documentElement, b = document.body;
     var max = Math.max(d.scrollHeight, b.scrollHeight) - window.innerHeight;
-    if (max > 60 && window.scrollY >= max - 70) {
-      window.removeEventListener("scroll", onScroll);
-      location.href = location.pathname.replace(/[^/]+\/?$/, next + "/");
+    var y = window.scrollY;
+    var atBottom = max > 60 && y >= max - 70;
+    var atTop = y <= 12;
+    var moving = y - lastY;
+    lastY = y;
+
+    if (atBottom && moving > 0) {
+      if (downArmed) {
+        window.removeEventListener("scroll", onScroll);
+        location.href = location.pathname.replace(/[^/]+\/?$/, next.slug + "/");
+        return;
+      }
+      downArmed = true;
+      upArmed = false;
+      showHint("继续下滑进入下一个作品：" + next.name + " ↓");
+    } else if (atTop && moving < 0) {
+      if (upArmed) {
+        window.removeEventListener("scroll", onScroll);
+        location.href = location.pathname.replace(/[^/]+\/?$/, prev.slug + "/");
+        return;
+      }
+      upArmed = true;
+      downArmed = false;
+      showHint("继续上滑返回上一个作品：" + prev.name + " ↑");
+    } else {
+      downArmed = false;
+      upArmed = false;
+      hideHint();
     }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 })();
 </script>
+
 
 </body></html>
