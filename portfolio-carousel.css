@@ -163,7 +163,7 @@
 /* ── 顶部导航：液态玻璃药丸条 ── */
 #portfolio-navigation-frame {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.30) 0%, rgba(255, 255, 255, 0.06) 24%, transparent 48%),
+    linear-gradient(135deg, rgba(140, 200, 255, 0.34) 0%, rgba(120, 180, 240, 0.08) 24%, transparent 48%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02)) !important;
   border: 1px solid rgba(255, 255, 255, 0.50) !important;
   border-radius: 28px !important;
@@ -178,7 +178,7 @@
 /* ── 左右按钮：液态玻璃圆钮 ── */
 .orbit-arrow {
   background:
-    radial-gradient(120% 120% at 30% 20%, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.06) 45%, transparent 70%),
+    radial-gradient(120% 120% at 30% 20%, rgba(160, 215, 255, 0.4), rgba(130, 190, 245, 0.08) 45%, transparent 70%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02));
   border: 1px solid rgba(255, 255, 255, 0.55);
   box-shadow:
@@ -188,7 +188,7 @@
 }
 .orbit-arrow:hover {
   background:
-    radial-gradient(120% 120% at 30% 20%, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.12) 45%, transparent 70%),
+    radial-gradient(120% 120% at 30% 20%, rgba(180, 225, 255, 0.55), rgba(150, 205, 250, 0.14) 45%, transparent 70%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
   border-color: rgba(255, 255, 255, 0.75);
 }
@@ -293,15 +293,16 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(38% 42% at 18% 30%, rgba(86, 141, 159, 0.55), transparent 70%),
-    radial-gradient(32% 38% at 82% 68%, rgba(94, 60, 140, 0.5), transparent 70%),
-    radial-gradient(26% 30% at 62% 12%, rgba(28, 108, 138, 0.45), transparent 70%);
+    radial-gradient(40% 44% at 16% 28%, rgba(110, 200, 235, 0.7), transparent 70%),
+    radial-gradient(34% 40% at 84% 66%, rgba(165, 100, 235, 0.62), transparent 70%),
+    radial-gradient(28% 32% at 60% 10%, rgba(70, 170, 215, 0.6), transparent 70%),
+    radial-gradient(30% 34% at 46% 88%, rgba(240, 170, 100, 0.32), transparent 72%);
   animation: portfolio-aurora 16s ease-in-out infinite alternate;
 }
 @keyframes portfolio-aurora {
-  0%   { transform: translate3d(0, 0, 0) rotate(0deg);   opacity: 0.7; }
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg);   opacity: 0.85; }
   50%  { transform: translate3d(4%, 2%, 0) rotate(3deg); opacity: 1; }
-  100% { transform: translate3d(-3%, 3%, 0) rotate(-3deg); opacity: 0.8; }
+  100% { transform: translate3d(-3%, 3%, 0) rotate(-3deg); opacity: 0.9; }
 }
 
 /* ── 标题入场动效 ── */
